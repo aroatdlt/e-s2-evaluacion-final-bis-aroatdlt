@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Juego de parejas Pokemon</title>
+        <link rel="icon" href="favicon.png" />
+        <link rel="stylesheet" href="assets/css/main.css">
+    </head>
+    
+    <body>
+        <div class="page">
+            <header class="page__header">
+                 <h1 class="title__game">EL juego de las parejas</h1>
+
+            </header>
+            <main class="page__main">
+                <form action="/signup" method="get">
+                    <input type="radio" name="number__cards" id="number__four" value="4">
+                    <label for="number__four">4</label>
+                    <input type="radio" name="number__cards" id="number__six" value="6">
+                    <label for="number__six">6</label>
+                    <input type="radio" name="number__cards" id="number__eight" value="8">
+                    <label for="number__eight">8</label>
+                </form>
+                <button class="button">Comenzar</button>
+                <ul class="card__list"></ul>
+            </main>
+        </div>
+        <script type="text/javascript" src="assets/js/main.js"></script>
+    </body>
+
+</html>
