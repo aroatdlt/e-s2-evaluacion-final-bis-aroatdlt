@@ -8,6 +8,7 @@ let imageCard = "";
 function resetGame() {
     const cardItems = document.querySelectorAll('.card__image');
     for (const item of cardItems){
+        item.remove(item);
     }
 }
 
