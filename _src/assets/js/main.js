@@ -48,8 +48,11 @@ function handleBeginGame() {
                 newCard.className = 'card__image';
                 const newImage = document.createElement('img');
                 newImage.src = `${imageCard}`;
-                newImage.setAttribute('alt', 'Carta Pokemon');
-                newCard.appendChild(newImage);
+                newImage.setAttribute('alt', 'Carta delantera Pokemon');
+                const newImageDefault = document.createElement('img');
+                newImageDefault.src = `https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB.`;
+                newImageDefault.setAttribute('alt', 'Carta trasera Adalab')
+                newCard.append(newImage, newImageDefault);
                 cardList.appendChild(newCard);
             }
         })
