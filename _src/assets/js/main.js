@@ -3,7 +3,22 @@
 //Recoger el valor del input seleccionado 
 const button = document.querySelector('.button');
 const cardList = document.querySelector('.card__list');
+const defaultInput = document.querySelector('#number__four');
+const inputs = document.querySelectorAll('input');
 let imageCard = "";
+let selectedInput = "";
+let lastSelectedInput;
+
+if(localStorage.getItem('numberCards')){
+    lastSelectedInput = localStorage.getItem('numberCards');
+    for (const input of inputs){
+        if (lastSelectedInput === input.value){
+            input.setAttribute('checked', true);
+        }
+    }
+} else {
+    defaultInput.setAttribute('checked', true);
+}
 
 function resetGame() {
     const cardItems = document.querySelectorAll('.card__image');
@@ -15,12 +30,14 @@ function resetGame() {
 function handleBeginGame() {
     resetGame();
     const inputs = document.querySelectorAll('input');
-    let selectedInput = "";
+    
+
     for (const input of inputs) {
         if (input.checked) {
             selectedInput = input.value;
         }
     }
+
     //Pedir al servidor el número de cartas que queremos jugar
     fetch(`https://raw.githubusercontent.com/Adalab/cards-data/master/${selectedInput}.json`)
         .then(response => response.json())
@@ -36,6 +53,7 @@ function handleBeginGame() {
                 cardList.appendChild(newCard);
             }
         })
+    localStorage.setItem('numberCards', (selectedInput));
 };
 
 button.addEventListener('click', handleBeginGame);
