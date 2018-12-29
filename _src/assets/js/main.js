@@ -57,19 +57,19 @@ function handleBeginGame() {
                 newCard.append(newImage, newImageDefault);
                 cardList.appendChild(newCard);
             }
-            const forwardCards = document.querySelectorAll('.pokemon__card--forward');
-            for (const forwardCard of forwardCards) {
-                forwardCard.classList.toggle('hidden');
+
+            const reverseCards = document.querySelectorAll('.pokemon__card--reverse');
+            for (let i = 0; i < reverseCards.length; i++){
+                reverseCards[i].addEventListener('click', handleSelectedCard);
             }
         })
 
     localStorage.setItem('numberCards', (selectedInput));
 
-    function handleSelectedCard() {
-        const selectedCard = event.currentTarget;
-
+    function handleSelectedCard(event) {
+        const selectedCard = event.target;
+        selectedCard.classList.toggle('hidden');
     }
-    cardList.addEventListener('click', handleSelectedCard);
 };
 
 button.addEventListener('click', handleBeginGame);

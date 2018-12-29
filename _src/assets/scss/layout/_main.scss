@@ -1,0 +1,18 @@
+.form__game {
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    margin-left: 20px; 
+}
+
+.card__list{
+    list-style-type: none;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.hidden {
+    display: none;
+}
