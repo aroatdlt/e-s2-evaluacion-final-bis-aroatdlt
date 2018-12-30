@@ -24,19 +24,21 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    padding: 30px;
 }
 
 .card__image {
     display: flex;
     flex-direction: column;
+    padding: 10px;
 }
 
 .pokemon__card--forward, .pokemon__card--reverse {
     width: 200px;
     height: 235px;
     border: 1px solid black;
-    margin: 20px;
     border-radius: 11px 11px 11px 11px;
+    margin: 20px;
 }
 
 .pokemon__card--reverse {
