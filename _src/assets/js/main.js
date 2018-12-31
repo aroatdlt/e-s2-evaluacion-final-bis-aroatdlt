@@ -5,8 +5,11 @@ const cardList = document.querySelector('.card__list');
 const defaultInput = document.querySelector('#number__four');
 const inputs = document.querySelectorAll('input');
 let imageCard = "";
+let pairCard = "";
+let classSelectedCard = [];
 let selectedInput = "";
 let lastSelectedInput;
+let specificClass = '';
 
 //Checked inputs default and the last one checked
 if (localStorage.getItem('numberCards')) {
@@ -51,11 +54,12 @@ function handleBeginGame() {
         const newImage = document.createElement('img');
         newImage.src = `${imageCard}`;
         newImage.setAttribute('alt', 'Carta delantera Pokemon');
+        pairCard = imageData[i].pair;
         newImage.className = 'pokemon__card--forward';
         const newImageDefault = document.createElement('img');
         newImageDefault.src = `https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB.`;
         newImageDefault.setAttribute('alt', 'Carta trasera Adalab');
-        newImageDefault.className = 'pokemon__card--reverse';
+        newImageDefault.className = `pokemon__card--reverse number__pair--${pairCard}`;
         newCard.append(newImage, newImageDefault);
         cardList.appendChild(newCard);
       }
@@ -72,9 +76,27 @@ function handleBeginGame() {
 
   //When you click one card, it will be disappear and we can see pokemon card
   function handleSelectedCard(event) {
-    const selectedCard = event.target;
-    selectedCard.classList.toggle('hidden');
-  }
+    const selectedCard = event.currentTarget;
+    selectedCard.classList.add('hidden');
+    const allClass = selectedCard.classList;
+
+    specificClass = allClass[1];
+    classSelectedCard.push(specificClass);
+    if (classSelectedCard.length === 2) {
+      if (classSelectedCard[0] === classSelectedCard[1]) {
+        classSelectedCard = [];
+      } else {
+        function startAgain() {
+          const removeFirstCard = document.querySelector('.' + classSelectedCard[0] + '.hidden');
+          const removeSecondCard = document.querySelector('.' + classSelectedCard[1] + '.hidden');
+          removeFirstCard.classList.remove('hidden');
+          removeSecondCard.classList.remove('hidden');
+          classSelectedCard = [];
+        }
+        setTimeout(startAgain, 2000);
+      }
+    }
+  };
 };
 
 button.addEventListener('click', handleBeginGame);
