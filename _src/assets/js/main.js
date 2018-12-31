@@ -10,6 +10,7 @@ let classSelectedCard = [];
 let selectedInput = "";
 let lastSelectedInput;
 let specificClass = '';
+let arrCards = [];
 
 //Checked inputs default and the last one checked
 if (localStorage.getItem('numberCards')) {
@@ -47,6 +48,7 @@ function handleBeginGame() {
   fetch(`https://raw.githubusercontent.com/Adalab/cards-data/master/${selectedInput}.json`)
     .then(response => response.json())
     .then(imageData => {
+      arrCards = [];
       for (let i = 0; i < imageData.length; i++) {
         imageCard = imageData[i].image;
         const newCard = document.createElement('li');
@@ -61,7 +63,16 @@ function handleBeginGame() {
         newImageDefault.setAttribute('alt', 'Carta trasera Adalab');
         newImageDefault.className = `pokemon__card--reverse number__pair--${pairCard}`;
         newCard.append(newImage, newImageDefault);
-        cardList.appendChild(newCard);
+        arrCards.push(newCard);
+      }
+
+      //Shuffle cards function
+      arrCards = arrCards.sort(function () {
+        return Math.random() - 0.5
+      });
+
+      for (const card of arrCards) {
+        cardList.appendChild(card);
       }
 
       //Add listeners to all printed reverse cards
