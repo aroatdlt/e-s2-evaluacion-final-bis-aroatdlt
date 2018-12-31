@@ -12,19 +12,23 @@
     <body>
         <div class="page">
             <header class="page__header">
-                 <h1 class="title__game">EL juego de las parejas</h1>
+                 <h1 class="title__game">El juego de las parejas</h1>
 
             </header>
             <main class="page__main">
-                <form action="/signup" method="get">
-                    <input type="radio" name="number__cards" id="number__four" value="4">
-                    <label for="number__four">4</label>
-                    <input type="radio" name="number__cards" id="number__six" value="6">
-                    <label for="number__six">6</label>
-                    <input type="radio" name="number__cards" id="number__eight" value="8">
-                    <label for="number__eight">8</label>
-                </form>
-                <button class="button">Comenzar</button>
+                <div class="form__game">
+                    <form action="/signup" method="get">
+                        <input type="radio" name="number__cards" id="number__four" value="4" class="input__number">
+                        <label for="number__four">4</label>
+                        <input type="radio" name="number__cards" id="number__six" value="6"
+                        class="input__number">
+                        <label for="number__six">6</label>
+                        <input type="radio" name="number__cards" id="number__eight" value="8"
+                        class="input__number">
+                        <label for="number__eight">8</label>
+                    </form>
+                    <button class="button">Comenzar</button>
+                </div>
                 <ul class="card__list"></ul>
             </main>
         </div>
