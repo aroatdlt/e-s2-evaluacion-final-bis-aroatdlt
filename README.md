@@ -1,6 +1,6 @@
-#Juego de cartas Pokemon
+# Juego de cartas Pokemon
 
-##by Aroa Tato de la Torre
+## by Aroa Tato de la Torre
 
 Este juego de cartas ha sido creado como propuesta para la re-evaluación del segundo sprint de Adalab. Para ello, se han tenido en cuenta los siguientes puntos:
 
