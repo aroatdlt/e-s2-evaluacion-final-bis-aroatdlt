@@ -4,10 +4,10 @@ const button = document.querySelector('.button');
 const cardList = document.querySelector('.card__list');
 const defaultInput = document.querySelector('#number__four');
 const inputs = document.querySelectorAll('input');
-let imageCard = "";
-let pairCard = "";
+let imageCard = '';
+let pairCard = '';
 let classSelectedCard = [];
-let selectedInput = "";
+let selectedInput = '';
 let lastSelectedInput;
 let specificClass = '';
 let arrCards = [];
@@ -68,7 +68,7 @@ function handleBeginGame() {
 
       //Shuffle cards function
       arrCards = arrCards.sort(function () {
-        return Math.random() - 0.5
+        return Math.random() - 0.5;
       });
 
       for (const card of arrCards) {
@@ -80,7 +80,7 @@ function handleBeginGame() {
       for (let i = 0; i < reverseCards.length; i++) {
         reverseCards[i].addEventListener('click', handleSelectedCard);
       }
-    })
+    });
 
   //Storage the number of cards that you play
   localStorage.setItem('numberCards', (selectedInput));
@@ -103,11 +103,11 @@ function handleBeginGame() {
           removeFirstCard.classList.remove('hidden');
           removeSecondCard.classList.remove('hidden');
           classSelectedCard = [];
-        }
+        };
         setTimeout(startAgain, 2000);
       }
     }
-  };
+  }
 };
 
 button.addEventListener('click', handleBeginGame);
