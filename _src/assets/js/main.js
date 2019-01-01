@@ -5,13 +5,9 @@ const cardList = document.querySelector('.card__list');
 const defaultInput = document.querySelector('#number__four');
 const inputs = document.querySelectorAll('input');
 let imageCard = '';
-let pairCard = '';
-let selectedCard = '';
-let classSelectedCard = [];
 let selectedInput = '';
 let lastSelectedInput;
-let specificClass = '';
-let arrCards = [];
+let selectedCard = '';
 
 //Checked inputs default and the last one checked
 if (localStorage.getItem('numberCards')) {
@@ -49,7 +45,6 @@ function handleBeginGame() {
   fetch(`https://raw.githubusercontent.com/Adalab/cards-data/master/${selectedInput}.json`)
     .then(response => response.json())
     .then(imageData => {
-      arrCards = [];
       for (let i = 0; i < imageData.length; i++) {
         imageCard = imageData[i].image;
         const newCard = document.createElement('li');
@@ -57,23 +52,13 @@ function handleBeginGame() {
         const newImage = document.createElement('img');
         newImage.src = `${imageCard}`;
         newImage.setAttribute('alt', 'Carta delantera Pokemon');
-        pairCard = imageData[i].pair;
         newImage.className = 'pokemon__card--forward';
         const newImageDefault = document.createElement('img');
         newImageDefault.src = `https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB.`;
         newImageDefault.setAttribute('alt', 'Carta trasera Adalab');
-        newImageDefault.className = `pokemon__card--reverse number__pair--${pairCard}`;
+        newImageDefault.className = 'pokemon__card--reverse';
         newCard.append(newImage, newImageDefault);
-        arrCards.push(newCard);
-      }
-
-      //Shuffle cards function
-      arrCards = arrCards.sort(function () {
-        return Math.random() - 0.5;
-      });
-
-      for (const card of arrCards) {
-        cardList.appendChild(card);
+        cardList.appendChild(newCard);
       }
 
       //Add listeners to all printed reverse cards
@@ -82,17 +67,10 @@ function handleBeginGame() {
         reverseCards[i].addEventListener('click', handleSelectedCard);
       }
       const forwardCards = document.querySelectorAll('.pokemon__card--forward');
-      for (let i = 0; i <forwardCards.length; i++){
+      for (let i = 0; i < forwardCards.length; i++) {
         forwardCards[i].addEventListener('click', resetCardReverse);
       }
     });
-  
-    function resetCardReverse(event) {
-      const pokemonCard = event.currentTarget;
-      pokemonCard.classList.add('hidden');
-      selectedCard.classList.remove('hidden');
-    };
-
 
   //Storage the number of cards that you play
   localStorage.setItem('numberCards', (selectedInput));
@@ -100,25 +78,14 @@ function handleBeginGame() {
   //When you click one card, it will be disappear and we can see pokemon card
   function handleSelectedCard(event) {
     selectedCard = event.currentTarget;
-    selectedCard.classList.add('hidden');
-    const allClass = selectedCard.classList;
+    selectedCard.classList.toggle('hidden');
+  }
 
-    specificClass = allClass[1];
-    classSelectedCard.push(specificClass);
-    if (classSelectedCard.length === 2) {
-      if (classSelectedCard[0] === classSelectedCard[1]) {
-        classSelectedCard = [];
-      } else {
-        function startAgain() {
-          const removeFirstCard = document.querySelector('.' + classSelectedCard[0] + '.hidden');
-          const removeSecondCard = document.querySelector('.' + classSelectedCard[1] + '.hidden');
-          removeFirstCard.classList.remove('hidden');
-          removeSecondCard.classList.remove('hidden');
-          classSelectedCard = [];
-        };
-        setTimeout(startAgain, 2000);
-      }
-    }
+  //When you click again, appear reverse card
+  function resetCardReverse(event){
+    const pokemonCard = event.currentTarget;
+    selectedCard = pokemonCard.nextSibling;
+    selectedCard.classList.remove('hidden');
   }
 };
 
