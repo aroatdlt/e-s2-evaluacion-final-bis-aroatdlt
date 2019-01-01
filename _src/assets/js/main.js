@@ -82,11 +82,11 @@ function handleBeginGame() {
   }
 
   //When you click again, appear reverse card
-  function resetCardReverse(event){
+  function resetCardReverse(event) {
     const pokemonCard = event.currentTarget;
     selectedCard = pokemonCard.nextSibling;
     selectedCard.classList.remove('hidden');
   }
-};
+}
 
 button.addEventListener('click', handleBeginGame);
