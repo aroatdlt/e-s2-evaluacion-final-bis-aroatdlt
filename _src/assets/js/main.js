@@ -8,6 +8,9 @@ let imageCard = '';
 let selectedInput = '';
 let lastSelectedInput;
 let selectedCard = '';
+const counterEl = document.querySelector('.counter');
+let counter = 0;
+let numberPair = '';
 
 //Checked inputs default and the last one checked
 if (localStorage.getItem('numberCards')) {
@@ -47,12 +50,17 @@ function handleBeginGame() {
     .then(imageData => {
       for (let i = 0; i < imageData.length; i++) {
         imageCard = imageData[i].image;
+        numberPair = imageData[i].pair;
         const newCard = document.createElement('li');
         newCard.className = 'card__image';
         const newImage = document.createElement('img');
         newImage.src = `${imageCard}`;
         newImage.setAttribute('alt', 'Carta delantera Pokemon');
         newImage.className = 'pokemon__card--forward';
+        const numberPairImg = document.createElement('span');
+        const text = document.createTextNode(numberPair);
+        numberPairImg.appendChild(text);
+        newCard.appendChild(numberPairImg);
         const newImageDefault = document.createElement('img');
         newImageDefault.src = `https://via.placeholder.com/160x195/30d9c4/ffffff/?text=ADALAB.`;
         newImageDefault.setAttribute('alt', 'Carta trasera Adalab');
@@ -79,6 +87,7 @@ function handleBeginGame() {
   function handleSelectedCard(event) {
     selectedCard = event.currentTarget;
     selectedCard.classList.toggle('hidden');
+    counterClick();
   }
 
   //When you click again, appear reverse card
@@ -86,6 +95,14 @@ function handleBeginGame() {
     const pokemonCard = event.currentTarget;
     selectedCard = pokemonCard.nextSibling;
     selectedCard.classList.remove('hidden');
+    counterClick();
+  }
+
+  function counterClick() {
+    if (counter < 5){
+      counter = counter + 1;
+    }
+    counterEl.innerHTML = counter;
   }
 }
 
